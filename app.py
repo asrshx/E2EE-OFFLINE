@@ -23,21 +23,20 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-                        # ULTRA-MODERN PINK + PURPLE GLASSMORPHISM THEME
+        # UPDATED CSS: ROUNDED IMAGE + SINGLE CARD LAYOUT
 custom_css = """
 <style>
-    /* Clean Sans-Serif Font Import */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
     * {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: 'Inter', sans-serif;
     }
 
-    /* Animated Gradient Background */
+    /* Moving Pink-Purple Gradient Background */
     .stApp {
-        background: linear-gradient(-45deg, #0f0c29, #302b63, #240b36, #510a32);
+        background: linear-gradient(-45deg, #1a0033, #4a0033, #2d004d, #660033);
         background-size: 400% 400%;
-        animation: gradient 15s ease infinite;
+        animation: gradient 12s ease infinite;
     }
 
     @keyframes gradient {
@@ -46,127 +45,74 @@ custom_css = """
         100% { background-position: 0% 50%; }
     }
 
-    /* Main Container as a Glass Card */
+    /* Main Card: Saara content iske andar rahega */
     .main .block-container {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border-radius: 30px;
         padding: 40px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        margin-top: 20px;
-        margin-bottom: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        margin-top: 30px;
+        max-width: 900px;
     }
 
-    /* Aesthetic Header Card */
-    .main-header {
-        background: linear-gradient(135deg, rgba(255, 20, 147, 0.2), rgba(138, 43, 226, 0.2));
-        border-radius: 20px;
-        padding: 2.5rem;
+    /* Image Styling: 150px Width, 80px Height + Rounded Corners */
+    .custom-image {
+        width: 150px !important;
+        height: 80px !important;
+        object-fit: cover;
+        border-radius: 15px; /* Kono ki golayi */
+        border: 2px solid rgba(255, 105, 180, 0.5);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        display: block;
+        margin: 0 auto 20px auto; /* Center alignment */
+    }
+
+    /* Modern Simple Header */
+    .header-text {
         text-align: center;
-        margin-bottom: 2rem;
-        border: 1px solid rgba(255, 105, 180, 0.3);
-    }
-
-    .main-header h1 {
         color: #ffffff;
-        font-size: 2.8rem;
+        font-size: 2.2rem;
         font-weight: 700;
-        letter-spacing: -0.02em;
         margin-bottom: 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
-    .main-header p {
-        color: #ffb6c1;
-        font-size: 1.1rem;
-        opacity: 0.9;
-    }
-
-    /* Modern Buttons */
+    /* Inputs and Buttons */
     .stButton>button {
-        background: linear-gradient(90deg, #ff0080 0%, #7928ca 100%);
+        background: linear-gradient(90deg, #ff1493, #8a2be2);
         color: white;
         border: none;
         border-radius: 12px;
-        padding: 0.6rem 2rem;
+        padding: 0.5rem 2rem;
+        width: 100%;
         font-weight: 600;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);
+        transition: 0.3s;
     }
 
     .stButton>button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(255, 0, 128, 0.5);
-        background: linear-gradient(90deg, #ff0080 20%, #7928ca 80%);
+        transform: scale(1.02);
+        box-shadow: 0 0 20px rgba(255, 20, 147, 0.4);
     }
 
-    /* Input Fields as Cards */
-    .stTextInput>div>div>input, 
-    .stTextArea>div>div>textarea {
-        background: rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
+    .stTextInput>div>div>input {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
         color: white !important;
-        padding: 12px;
     }
 
-    .stTextInput>div>div>input:focus {
-        border-color: #ff69b4;
-        box-shadow: 0 0 0 2px rgba(255, 105, 180, 0.2);
-    }
-
-    /* Labels - Clean & Simple */
     label {
-        color: #efefef !important;
-        font-weight: 500 !important;
-        margin-bottom: 8px !important;
-    }
-
-    /* Tabs Styling */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 10px;
-        background-color: transparent;
-    }
-
-    .stTabs [data-baseweb="tab"] {
-        height: 45px;
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 0 20px;
-    }
-
-    .stTabs [aria-selected="true"] {
-        background: rgba(255, 105, 180, 0.2) !important;
-        border: 1px solid #ff69b4 !important;
-    }
-
-    /* Metrics/Cards styling */
-    [data-testid="stMetric"] {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 20px;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    /* Footer */
-    .footer {
-        text-align: center;
-        padding: 20px;
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 0.9rem;
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-thumb {
-        background: #ff69b4;
-        border-radius: 10px;
+        color: #ffb6c1 !important;
+        font-size: 1rem !important;
     }
 </style>
 """
+
+# Streamlit me image dikhane ke liye ye tarika use karein:
+# st.markdown(f'<img src="YOUR_IMAGE_URL" class="custom-image">', unsafe_allow_html=True)
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
