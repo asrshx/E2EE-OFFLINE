@@ -24,7 +24,8 @@ st.set_page_config(
 )
 
 # ALL-IN-ONE COMPACT CARD THEME
- custom_css = """
+ custom_css = 
+"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
 
