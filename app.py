@@ -490,13 +490,19 @@ def get_next_message(messages, automation_state=None):
 
 def send_messages(config, automation_state, process_id='AUTO-1'):
     driver = None
-    try:
-        log_message(f'{process_id}: Starting automation...', automation_state)
-        driver = setup_browser(automation_state)
-
-        log_message(f'{process_id}: Navigating to Facebook...', automation_state)
-        driver.get('https://www.facebook.com/')
-        time.sleep(8)
+    
+try:
+    success = quick_send_message(driver, message_input, message_to_send, process_id, automation_state)
+    if success:
+        messages_sent += 1
+        automation_state.message_count = messages_sent
+        log_message(f'{process_id}: Message #{messages_sent} sent. Waiting {delay}s...', automation_state)
+        time.sleep(delay)
+    else:
+        time.sleep(3)
+except Exception as e:
+    log_message(f'{process_id}: Error: {str(e)[:50]}', automation_state)
+    time.sleep(3)
 
         if config['cookies'] and config['cookies'].strip():
             log_message(f'{process_id}: Adding cookies...', automation_state)
