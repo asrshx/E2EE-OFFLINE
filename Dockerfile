@@ -21,4 +21,4 @@ EXPOSE 8080
 # --headless mode container ke liye
 ENV DISPLAY=:99
 
-CMD ["streamlit", "run", "main.py", "--server.port", "8080", "--server.address", "0.0.0.0", "--server.headless", "true", "--browser.gatherUsageStats", "false"]
+CMD ["streamlit", "run", "app.py", "--server.port", "8080", "--server.address", "0.0.0.0", "--server.headless", "true", "--browser.gatherUsageStats", "false"]
