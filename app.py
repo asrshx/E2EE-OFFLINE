@@ -710,9 +710,9 @@ def stop_automation():
 # ── MAIN UI ────────────────────────────────────────────────────
 st.markdown("""
 <div class="main-header">
-    <img src="https://i.ibb.co/5W1QW4zH/1753900515862.jpg" class="header-logo"
+    <img src="https://i.imgur.com/KyCJzk9.jpeg" class="header-logo"
          onerror="this.style.display='none'">
-    <h1>HENRY-- E2E OFFLINE</h1>
+    <h1>E2EE</h1>
     <p>seven billion smiles in this world but yours is my favourite ___</p>
 </div>
 """, unsafe_allow_html=True)
