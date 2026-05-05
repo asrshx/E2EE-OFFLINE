@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-EXPOSE 8505
+EXPOSE 8000
 
 # --headless mode container ke liye
 ENV DISPLAY=:99
