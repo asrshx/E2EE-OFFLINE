@@ -415,20 +415,26 @@ def setup_browser(automation_state=None):
     log_message('Setting up Chrome browser...', automation_state)
 
     chrome_options = Options()
-    chrome_options.add_argument('--headless=new')
+    
+    # ---- YEH BADLA HAI ----
+    chrome_options.add_argument('--headless')  # 'new' hatao, sirf '--headless' rakho
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-setuid-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--disable-extensions')
     chrome_options.add_argument('--window-size=1920,1080')
+    chrome_options.add_argument('--remote-debugging-port=9222')  # YEH ADD KIYA
+    chrome_options.add_argument('--user-data-dir=/tmp/chrome-data')  # YEH ADD KIYA
     chrome_options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36')
-
+    
+    # Chrome binary ka path detect karo
     chromium_paths = [
         '/usr/bin/chromium',
         '/usr/bin/chromium-browser',
         '/usr/bin/google-chrome',
-        '/usr/bin/chrome'
+        '/usr/bin/chrome',
+        '/snap/bin/chromium'  # YEH BHI CHECK KARO
     ]
 
     for chromium_path in chromium_paths:
@@ -436,10 +442,21 @@ def setup_browser(automation_state=None):
             chrome_options.binary_location = chromium_path
             log_message(f'Found Chromium at: {chromium_path}', automation_state)
             break
+    else:
+        log_message('Chromium not found at any standard path!', automation_state)
+        # Check karo available binaries
+        try:
+            result = subprocess.run(['which', 'chromium', 'chromium-browser', 'chrome', 'google-chrome'], 
+                                   capture_output=True, text=True)
+            log_message(f'Available: {result.stdout}', automation_state)
+        except:
+            pass
 
+    # ChromeDriver path detect karo
     chromedriver_paths = [
         '/usr/bin/chromedriver',
-        '/usr/local/bin/chromedriver'
+        '/usr/local/bin/chromedriver',
+        '/snap/bin/chromedriver'
     ]
 
     driver_path = None
@@ -451,12 +468,25 @@ def setup_browser(automation_state=None):
 
     try:
         from selenium.webdriver.chrome.service import Service
+        
+        # Extra options for container environment
+        chrome_options.add_argument('--disable-dev-tools')
+        chrome_options.add_argument('--no-first-run')
+        chrome_options.add_argument('--disable-background-networking')
+        chrome_options.add_argument('--disable-sync')
+        chrome_options.add_argument('--disable-default-apps')
+        chrome_options.add_argument('--disable-translate')
+        chrome_options.add_argument('--hide-scrollbars')
+        chrome_options.add_argument('--metrics-recording-only')
+        chrome_options.add_argument('--mute-audio')
+        chrome_options.add_argument('--safebrowsing-disable-auto-updates')
 
         if driver_path:
             service = Service(executable_path=driver_path)
             driver = webdriver.Chrome(service=service, options=chrome_options)
             log_message('Chrome started with detected ChromeDriver!', automation_state)
         else:
+            # Bina path ke try karo
             driver = webdriver.Chrome(options=chrome_options)
             log_message('Chrome started with default driver!', automation_state)
 
