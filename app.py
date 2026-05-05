@@ -23,93 +23,91 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-        # UPDATED CSS: ROUNDED IMAGE + SINGLE CARD LAYOUT
+# ALL-IN-ONE COMPACT CARD THEME
 custom_css = """
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+    /* Clean & Modern Font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
     * {
         font-family: 'Inter', sans-serif;
     }
 
-    /* Moving Pink-Purple Gradient Background */
+    /* Full Page Background */
     .stApp {
-        background: linear-gradient(-45deg, #1a0033, #4a0033, #2d004d, #660033);
-        background-size: 400% 400%;
-        animation: gradient 12s ease infinite;
+        background: linear-gradient(135deg, #1a0033 0%, #4a0033 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    @keyframes gradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    /* Main Card: Saara content iske andar rahega */
+    /* The Main Single Card (Container) */
     .main .block-container {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
+        background: rgba(255, 255, 255, 0.07);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border-radius: 30px;
-        padding: 40px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        margin-top: 30px;
-        max-width: 900px;
+        padding: 40px !important;
+        border: 1px solid rgba(255, 105, 180, 0.3);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        max-width: 500px; /* Card ki width control karne ke liye */
+        margin: auto;
     }
 
-    /* Image Styling: 150px Width, 80px Height + Rounded Corners */
+    /* Image inside the Card */
     .custom-image {
         width: 150px !important;
         height: 80px !important;
         object-fit: cover;
-        border-radius: 15px; /* Kono ki golayi */
-        border: 2px solid rgba(255, 105, 180, 0.5);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        border-radius: 20px; /* Kono ki golayi */
         display: block;
-        margin: 0 auto 20px auto; /* Center alignment */
+        margin: 0 auto 25px auto;
+        border: 2px solid #ff69b4;
+        box-shadow: 0 8px 20px rgba(255, 20, 147, 0.3);
     }
 
-    /* Modern Simple Header */
-    .header-text {
+    /* Text & Headings inside the Card */
+    h1, h2, h3, p, label {
+        color: #ffffff !important;
         text-align: center;
-        color: #ffffff;
-        font-size: 2.2rem;
-        font-weight: 700;
-        margin-bottom: 10px;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
-    /* Inputs and Buttons */
+    .stTextInput>div>div>input {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 105, 180, 0.4) !important;
+        border-radius: 12px !important;
+        color: white !important;
+    }
+
+    /* Pink Purple Button */
     .stButton>button {
         background: linear-gradient(90deg, #ff1493, #8a2be2);
         color: white;
         border: none;
         border-radius: 12px;
-        padding: 0.5rem 2rem;
+        padding: 10px 20px;
         width: 100%;
         font-weight: 600;
-        transition: 0.3s;
+        margin-top: 10px;
     }
 
-    .stButton>button:hover {
-        transform: scale(1.02);
-        box-shadow: 0 0 20px rgba(255, 20, 147, 0.4);
-    }
-
-    .stTextInput>div>div>input {
-        background: rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-        color: white !important;
-    }
-
-    label {
-        color: #ffb6c1 !important;
-        font-size: 1rem !important;
-    }
+    /* Hide Streamlit elements for a cleaner look */
+    #MainMenu, footer, header {visibility: hidden;}
 </style>
 """
+
+# Streamlit code example:
+import streamlit as st
+
+st.markdown(custom_css, unsafe_allow_html=True)
+
+# Pura content ishi sequence mein card ke andar dikhega
+st.markdown('<img src="YOUR_IMAGE_LINK_HERE" class="custom-image">', unsafe_allow_html=True)
+st.markdown("### Welcome to My App")
+st.write("Ye pura content ab ek hi aesthetic card ke andar hai.")
+name = st.text_input("Apna Naam Likhein")
+if st.button("Click Me"):
+    st.success(f"Hello {name}!")
 
 # Streamlit me image dikhane ke liye ye tarika use karein:
 # st.markdown(f'<img src="YOUR_IMAGE_URL" class="custom-image">', unsafe_allow_html=True)
