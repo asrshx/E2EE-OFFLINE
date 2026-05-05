@@ -23,99 +23,65 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
- custom_css = """
+import streamlit as st
+
+# Is line ke pehle koi space nahi hona chahiye
+custom_css = """
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+* { font-family: 'Inter', sans-serif; }
 
-    /* Global Changes */
-    * { font-family: 'Inter', sans-serif; }
-    
-    /* Background Gradient */
-    .stApp {
-        background: linear-gradient(160deg, #1a0033 0%, #4a0033 50%, #2d004d 100%);
-    }
+.stApp {
+    background: linear-gradient(160deg, #1a0033 0%, #4a0033 50%, #2d004d 100%);
+}
 
-    /* The Master Card - Jo sabko ek sath rakhega */
-    .main .block-container {
-        background: rgba(255, 255, 255, 0.04);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-radius: 24px;
-        padding: 25px !important;
-        margin-top: 20px;
-        border: 1px solid rgba(255, 105, 180, 0.2);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-        max-width: 450px !important; /* Mobile friendly compact width */
-    }
+/* Main Container Card */
+.main .block-container {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px !important;
+    padding: 20px !important;
+    margin: 20px auto !important;
+    border: 1px solid rgba(255, 105, 180, 0.25) !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
+    max-width: 420px !important;
+}
 
-    /* Image Styling - 150x80 with Rounded Corners */
-    .custom-image {
-        width: 150px !important;
-        height: 80px !important;
-        object-fit: cover;
-        border-radius: 12px;
-        display: block;
-        margin: 0 auto 15px auto;
-        border: 2px solid rgba(255, 20, 147, 0.6);
-        box-shadow: 0 0 15px rgba(255, 20, 147, 0.4);
-    }
+/* Rounded Header Image 150x80 */
+.custom-header {
+    width: 150px !important;
+    height: 80px !important;
+    object-fit: cover;
+    border-radius: 15px;
+    display: block;
+    margin: 0 auto 15px auto;
+    border: 2px solid #ff69b4;
+}
 
-    /* Typography Clean-up */
-    h1, h2, h3, p {
-        color: white !important;
-        text-align: center;
-        margin-bottom: 10px !important;
-    }
-    
-    label {
-        color: #ffb6c1 !important;
-        font-weight: 600 !important;
-        font-size: 0.9rem !important;
-    }
+h1, h2, h3, p, label {
+    color: white !important;
+    text-align: center;
+}
 
-    /* Input Fields Modern Look */
-    .stTextInput>div>div>input, .stTextArea>div>div>textarea, .stNumberInput div div input {
-        background: rgba(0, 0, 0, 0.3) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        border-radius: 10px !important;
-        color: white !important;
-        padding: 8px !important;
-    }
+.stTextInput>div>div>input {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 10px !important;
+    color: white !important;
+}
 
-    /* Tabs Styling */
-    .stTabs [data-baseweb="tab-list"] { gap: 8px; }
-    .stTabs [data-baseweb="tab"] {
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 8px;
-        color: white;
-        padding: 5px 15px;
-    }
-    .stTabs [aria-selected="true"] {
-        background: linear-gradient(90deg, #ff1493, #8a2be2) !important;
-    }
+.stButton>button {
+    background: linear-gradient(90deg, #ff0080, #7928ca) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    font-weight: 700 !important;
+    padding: 10px !important;
+}
 
-    /* Cool Gradient Button */
-    .stButton>button {
-        background: linear-gradient(90deg, #ff0080, #7928ca) !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 12px !important;
-        width: 100% !important;
-        font-weight: 700 !important;
-        padding: 12px !important;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: 0.3s ease;
-    }
-
-    .stButton>button:hover {
-        transform: scale(1.02);
-        box-shadow: 0 0 20px rgba(255, 0, 128, 0.6);
-    }
-
-    /* Hide redundant Streamlit UI */
-    footer {visibility: hidden;}
-    header {display: none;}
+footer, header {visibility: hidden;}
 </style>
 """
 
