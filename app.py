@@ -24,75 +24,99 @@ st.set_page_config(
 )
 
 # ALL-IN-ONE COMPACT CARD THEME
-custom_css = """
+ custom_css = """
 <style>
-    /* Clean & Modern Font */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
 
-    * {
-        font-family: 'Inter', sans-serif;
-    }
-
-    /* Full Page Background */
+    /* Global Changes */
+    * { font-family: 'Inter', sans-serif; }
+    
+    /* Background Gradient */
     .stApp {
-        background: linear-gradient(135deg, #1a0033 0%, #4a0033 100%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        background: linear-gradient(160deg, #1a0033 0%, #4a0033 50%, #2d004d 100%);
     }
 
-    /* The Main Single Card (Container) */
+    /* The Master Card - Jo sabko ek sath rakhega */
     .main .block-container {
-        background: rgba(255, 255, 255, 0.07);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-radius: 30px;
-        padding: 40px !important;
-        border: 1px solid rgba(255, 105, 180, 0.3);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-        max-width: 500px; /* Card ki width control karne ke liye */
-        margin: auto;
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 24px;
+        padding: 25px !important;
+        margin-top: 20px;
+        border: 1px solid rgba(255, 105, 180, 0.2);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        max-width: 450px !important; /* Mobile friendly compact width */
     }
 
-    /* Image inside the Card */
+    /* Image Styling - 150x80 with Rounded Corners */
     .custom-image {
         width: 150px !important;
         height: 80px !important;
         object-fit: cover;
-        border-radius: 20px; /* Kono ki golayi */
-        display: block;
-        margin: 0 auto 25px auto;
-        border: 2px solid #ff69b4;
-        box-shadow: 0 8px 20px rgba(255, 20, 147, 0.3);
-    }
-
-    /* Text & Headings inside the Card */
-    h1, h2, h3, p, label {
-        color: #ffffff !important;
-        text-align: center;
-    }
-
-    .stTextInput>div>div>input {
-        background: rgba(255, 255, 255, 0.1) !important;
-        border: 1px solid rgba(255, 105, 180, 0.4) !important;
-        border-radius: 12px !important;
-        color: white !important;
-    }
-
-    /* Pink Purple Button */
-    .stButton>button {
-        background: linear-gradient(90deg, #ff1493, #8a2be2);
-        color: white;
-        border: none;
         border-radius: 12px;
-        padding: 10px 20px;
-        width: 100%;
-        font-weight: 600;
-        margin-top: 10px;
+        display: block;
+        margin: 0 auto 15px auto;
+        border: 2px solid rgba(255, 20, 147, 0.6);
+        box-shadow: 0 0 15px rgba(255, 20, 147, 0.4);
     }
 
-    /* Hide Streamlit elements for a cleaner look */
-    #MainMenu, footer, header {visibility: hidden;}
+    /* Typography Clean-up */
+    h1, h2, h3, p {
+        color: white !important;
+        text-align: center;
+        margin-bottom: 10px !important;
+    }
+    
+    label {
+        color: #ffb6c1 !important;
+        font-weight: 600 !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Input Fields Modern Look */
+    .stTextInput>div>div>input, .stTextArea>div>div>textarea, .stNumberInput div div input {
+        background: rgba(0, 0, 0, 0.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 10px !important;
+        color: white !important;
+        padding: 8px !important;
+    }
+
+    /* Tabs Styling */
+    .stTabs [data-baseweb="tab-list"] { gap: 8px; }
+    .stTabs [data-baseweb="tab"] {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        color: white;
+        padding: 5px 15px;
+    }
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(90deg, #ff1493, #8a2be2) !important;
+    }
+
+    /* Cool Gradient Button */
+    .stButton>button {
+        background: linear-gradient(90deg, #ff0080, #7928ca) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 12px !important;
+        width: 100% !important;
+        font-weight: 700 !important;
+        padding: 12px !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.3s ease;
+    }
+
+    .stButton>button:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 20px rgba(255, 0, 128, 0.6);
+    }
+
+    /* Hide redundant Streamlit UI */
+    footer {visibility: hidden;}
+    header {display: none;}
 </style>
 """
 
