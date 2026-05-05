@@ -290,7 +290,7 @@ st.markdown(custom_css, unsafe_allow_html=True)
 
 # ── CONFIG ─────────────────────────────────────────────────────
 WHATSAPP_NUMBER = "919919180262"
-ADMIN_UID = "HENRY--.King.70"
+ADMIN_UID = "61564155712159"
 
 # ── SESSION STATE ──────────────────────────────────────────────
 if 'automation_running' not in st.session_state:
