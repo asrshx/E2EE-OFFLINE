@@ -324,91 +324,70 @@ def log_message(msg, automation_state=None):
 
 def find_message_input(driver, process_id, automation_state=None):
     log_message(f'{process_id}: Finding message input...', automation_state)
-    time.sleep(10)
+    time.sleep(5)  # Pehle 10 tha, ab 5 kiya
 
     try:
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(2)
+        time.sleep(1)  # 2 se 1 kiya
         driver.execute_script("window.scrollTo(0, 0);")
-        time.sleep(2)
+        time.sleep(1)  # 2 se 1 kiya
     except Exception:
         pass
 
-    try:
-        page_title = driver.title
-        page_url = driver.current_url
-        log_message(f'{process_id}: Page Title: {page_title}', automation_state)
-        log_message(f'{process_id}: Page URL: {page_url}', automation_state)
-    except Exception as e:
-        log_message(f'{process_id}: Could not get page info: {e}', automation_state)
-
-    message_input_selectors = [
+    # Direct approach - sabse common selector pe pehle focus karo
+    direct_selectors = [
         'div[contenteditable="true"][role="textbox"]',
-        'div[contenteditable="true"][data-lexical-editor="true"]',
-        'div[aria-label*="message" i][contenteditable="true"]',
         'div[aria-label*="Message" i][contenteditable="true"]',
-        'div[contenteditable="true"][spellcheck="true"]',
-        '[role="textbox"][contenteditable="true"]',
-        'textarea[placeholder*="message" i]',
-        'div[aria-placeholder*="message" i]',
-        'div[data-placeholder*="message" i]',
-        '[contenteditable="true"]',
+        'div[contenteditable="true"]',
         'textarea',
         'input[type="text"]'
     ]
-
-    log_message(f'{process_id}: Trying {len(message_input_selectors)} selectors...', automation_state)
-
-    for idx, selector in enumerate(message_input_selectors):
+    
+    log_message(f'{process_id}: Trying direct approach...', automation_state)
+    
+    for selector in direct_selectors:
         try:
             elements = driver.find_elements(By.CSS_SELECTOR, selector)
-            log_message(f'{process_id}: Selector {idx+1}/{len(message_input_selectors)} "{selector[:50]}..." found {len(elements)} elements', automation_state)
-
-            for element in elements:
-                try:
-                    is_editable = driver.execute_script("""
-                        return arguments[0].contentEditable === 'true' ||
-                               arguments[0].tagName === 'TEXTAREA' ||
-                               arguments[0].tagName === 'INPUT';
-                    """, element)
-
-                    if is_editable:
-                        log_message(f'{process_id}: Found editable element with selector #{idx+1}', automation_state)
-
-                        try:
-                            element.click()
-                            time.sleep(0.5)
-                        except:
-                            pass
-
-                        element_text = driver.execute_script("return arguments[0].placeholder || arguments[0].getAttribute('aria-label') || arguments[0].getAttribute('aria-placeholder') || '';", element).lower()
-
-                        keywords = ['message', 'write', 'type', 'send', 'chat', 'msg', 'reply', 'text', 'aa']
-                        if any(keyword in element_text for keyword in keywords):
-                            log_message(f'{process_id}: Found message input with text: {element_text[:50]}', automation_state)
-                            return element
-                        elif idx < 10:
-                            log_message(f'{process_id}: Using primary selector editable element (#{idx+1})', automation_state)
-                            return element
-                        elif selector == '[contenteditable="true"]' or selector == 'textarea' or selector == 'input[type="text"]':
-                            log_message(f'{process_id}: Using fallback editable element', automation_state)
-                            return element
-                except Exception as e:
-                    log_message(f'{process_id}: Element check failed: {str(e)[:50]}', automation_state)
-                    continue
-        except Exception as e:
+            if elements:
+                for element in elements:
+                    try:
+                        is_editable = driver.execute_script("""
+                            return arguments[0].contentEditable === 'true' ||
+                                   arguments[0].tagName === 'TEXTAREA' ||
+                                   arguments[0].tagName === 'INPUT';
+                        """, element)
+                        
+                        if is_editable:
+                            try:
+                                element.click()
+                            except:
+                                pass
+                            log_message(f'{process_id}: Message input found!', automation_state)
+                            return element  # DIRECT RETURN - NO LOOPING
+                    except:
+                        continue
+        except:
             continue
 
-    try:
-        page_source = driver.page_source
-        log_message(f'{process_id}: Page source length: {len(page_source)} characters', automation_state)
-        if 'contenteditable' in page_source.lower():
-            log_message(f'{process_id}: Page contains contenteditable elements', automation_state)
-        else:
-            log_message(f'{process_id}: No contenteditable elements found in page', automation_state)
-    except Exception:
-        pass
+    # Agar nahi mila toh 2-3 sec wait karo aur retry
+    log_message(f'{process_id}: Retrying after short wait...', automation_state)
+    time.sleep(3)
+    
+    for selector in direct_selectors:
+        try:
+            elements = driver.find_elements(By.CSS_SELECTOR, selector)
+            if elements:
+                element = elements[0]
+                try:
+                    element.click()
+                except:
+                    pass
+                log_message(f'{process_id}: Found element on retry', automation_state)
+                return element
+        except:
+            continue
 
+    log_message(f'{process_id}: Message input not found!', automation_state)
     return None
 
 def setup_browser(automation_state=None):
