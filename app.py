@@ -23,102 +23,151 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-import streamlit as st
-
-# Bilkul zero indentation se shuru karein
+# ULTRA-MODERN PINK + PURPLE GLASSMORPHISM THEME
 custom_css = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    /* Clean Sans-Serif Font Import */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-/* Pura Page Background */
-.stApp {
-    background: radial-gradient(circle at top right, #4a0033, #1a0033);
-    background-attachment: fixed;
-}
+    * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-/* Main Container: Floating Glass Card */
-.main .block-container {
-    background: rgba(255, 255, 255, 0.03) !important;
-    backdrop-filter: blur(25px) saturate(180%);
-    -webkit-backdrop-filter: blur(25px) saturate(180%);
-    border-radius: 35px !important;
-    padding: 30px !important;
-    margin: 40px auto !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6) !important;
-    max-width: 440px !important; /* Perfect Mobile/Web Card Width */
-}
+    /* Animated Gradient Background */
+    .stApp {
+        background: linear-gradient(-45deg, #0f0c29, #302b63, #240b36, #510a32);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+    }
 
-/* Header Image: 150x80 Rounded Corners */
-.custom-header {
-    width: 150px !important;
-    height: 80px !important;
-    object-fit: cover;
-    border-radius: 20px;
-    display: block;
-    margin: 0 auto 20px auto;
-    border: 2px solid rgba(255, 105, 180, 0.5);
-    box-shadow: 0 10px 25px rgba(255, 20, 147, 0.3);
-}
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
 
-/* Typography Clean-up */
-* { font-family: 'Inter', sans-serif !important; }
+    /* Main Container as a Glass Card */
+    .main .block-container {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 24px;
+        padding: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 
-h1, h2, h3, p, label {
-    color: #ffffff !important;
-    text-align: center;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
+    /* Aesthetic Header Card */
+    .main-header {
+        background: linear-gradient(135deg, rgba(255, 20, 147, 0.2), rgba(138, 43, 226, 0.2));
+        border-radius: 20px;
+        padding: 2.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(255, 105, 180, 0.3);
+    }
 
-/* Input Fields: Premium Dark Glass */
-.stTextInput>div>div>input, .stTextArea>div>div>textarea {
-    background: rgba(0, 0, 0, 0.4) !important;
-    border: 1px solid rgba(255, 105, 180, 0.3) !important;
-    border-radius: 15px !important;
-    color: #ffb6c1 !important;
-    padding: 12px !important;
-}
+    .main-header h1 {
+        color: #ffffff;
+        font-size: 2.8rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 10px;
+    }
 
-/* Tabs: Minimalist & Aesthetic */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 15px;
-    background: transparent;
-}
-.stTabs [data-baseweb="tab"] {
-    color: rgba(255, 255, 255, 0.6) !important;
-    border-radius: 10px;
-}
-.stTabs [aria-selected="true"] {
-    background: rgba(255, 105, 180, 0.2) !important;
-    color: #ff69b4 !important;
-    border-bottom: 2px solid #ff69b4 !important;
-}
+    .main-header p {
+        color: #ffb6c1;
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
 
-/* Ultra-Cool Button */
-.stButton>button {
-    background: linear-gradient(135deg, #ff0080 0%, #7928ca 100%) !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 16px !important;
-    width: 100% !important;
-    font-weight: 700 !important;
-    font-size: 1rem !important;
-    padding: 14px !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 10px 20px rgba(255, 0, 128, 0.4);
-    transition: 0.4s all ease;
-}
+    /* Modern Buttons */
+    .stButton>button {
+        background: linear-gradient(90deg, #ff0080 0%, #7928ca 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 0.6rem 2rem;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);
+    }
 
-.stButton>button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 30px rgba(255, 0, 128, 0.6);
-}
+    .stButton>button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 0, 128, 0.5);
+        background: linear-gradient(90deg, #ff0080 20%, #7928ca 80%);
+    }
 
-/* UI Hiding */
-header, footer { visibility: hidden; height: 0; }
+    /* Input Fields as Cards */
+    .stTextInput>div>div>input, 
+    .stTextArea>div>div>textarea {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: white !important;
+        padding: 12px;
+    }
+
+    .stTextInput>div>div>input:focus {
+        border-color: #ff69b4;
+        box-shadow: 0 0 0 2px rgba(255, 105, 180, 0.2);
+    }
+
+    /* Labels - Clean & Simple */
+    label {
+        color: #efefef !important;
+        font-weight: 500 !important;
+        margin-bottom: 8px !important;
+    }
+
+    /* Tabs Styling */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 10px;
+        background-color: transparent;
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        height: 45px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0 20px;
+    }
+
+    .stTabs [aria-selected="true"] {
+        background: rgba(255, 105, 180, 0.2) !important;
+        border: 1px solid #ff69b4 !important;
+    }
+
+    /* Metrics/Cards styling */
+    [data-testid="stMetric"] {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Footer */
+    .footer {
+        text-align: center;
+        padding: 20px;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb {
+        background: #ff69b4;
+        border-radius: 10px;
+    }
 </style>
 """
+
 
 # Streamlit code example:
 import streamlit as st
