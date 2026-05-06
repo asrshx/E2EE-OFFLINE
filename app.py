@@ -728,7 +728,8 @@ if user_config:
 
     with tab1:
         st.markdown("<div class='main-header'><h3>Your Configuration</h3></div>", unsafe_allow_html=True)
-     
+
+        <div class="main-header">
         chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'],
                                placeholder="e.g., 1362400298935018",
                                help="Facebook conversation ID from the URL")
