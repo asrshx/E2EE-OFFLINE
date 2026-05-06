@@ -954,10 +954,51 @@ if user_config:
 
     with tab2:
         st.markdown("### Automation Control")
-        # ... (Baaki tab 2 ka code yahan aayega, indented rahega) ...
 
-else: # Ye else bhi bilkul left side mein if ke barabar hona chahiye
+        user_config = db.get_user_config('MAIN')
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("Messages Sent", st.session_state.automation_state.message_count)
+        with col2:
+            status = "Running" if st.session_state.automation_state.running else "Stopped"
+            st.metric("Status", status)
+        with col3:
+            st.metric("Chat ID", user_config['chat_id'][:10] + "..." if user_config['chat_id'] else "Not Set")
+
+        st.markdown("---")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            if st.button("Start Automation", disabled=st.session_state.automation_state.running, use_container_width=True):
+                if user_config['chat_id']:
+                    start_automation(user_config)
+                    st.success("Automation started!")
+                    st.rerun()
+                else:
+                    st.error("Please set Chat ID in Configuration first!")
+
+        with col2:
+            if st.button("Stop Automation", disabled=not st.session_state.automation_state.running, use_container_width=True):
+                stop_automation()
+                st.warning("Automation stopped!")
+                st.rerun()
+
+        if st.session_state.automation_state.logs:
+            st.markdown("### Live Console Output")
+
+            logs_html = '<div class="console-output">'
+            for log in st.session_state.automation_state.logs[-30:]:
+                logs_html += f'<div class="console-line">{log}</div>'
+            logs_html += '</div>'
+
+            st.markdown(logs_html, unsafe_allow_html=True)
+
+            if st.button("Refresh Logs"):
+                st.rerun()
+else:
     st.warning("No configuration found. Please refresh the page!")
 
-# Footer
-st.markdown('<div style="text-align:center; padding:20px; color:#888;">𝘛𝘩𝘦 𝘛𝘰𝘰𝘭 𝘔𝘢𝘥𝘦 𝘉𝘺 𝙃𝙀𝙉𝙍𝙔--</div>', unsafe_allow_html=True)
+# ── FOOTER ─────────────────────────────────────────────────────
+st.markdown('<div class="footer">Made with love by HENRY-- | 2025</div>', unsafe_allow_html=True)
