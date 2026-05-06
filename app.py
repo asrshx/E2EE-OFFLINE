@@ -727,9 +727,12 @@ if user_config:
     tab1, tab2 = st.tabs(["Configuration", "Automation"])
 
     with tab1:
-        st.markdown("<div class='main-header'><h3>Your Configuration</h3></div>", unsafe_allow_html=True)
-
-        st.markdown('<div class="main-header">'
+        # 1. Yahan se Card/Header shuru ho raha hai
+        st.markdown('<div class="main-header">', unsafe_allow_html=True)
+        
+        st.markdown("### Your Configuration")
+        
+        # 2. Saare Inputs iske andar aayenge
         chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'],
                                placeholder="e.g., 1362400298935018",
                                help="Facebook conversation ID from the URL")
@@ -754,7 +757,12 @@ if user_config:
                                height=150,
                                help="Enter each message on a new line")
 
-        if st.button("Save Configuration", unsafe_allow_html=True)
+        if st.button("Save Configuration"):
+            # Save karne ka logic yahan aayega
+            st.success("Settings Saved!")
+
+        # 3. Yahan Card band ho raha hai (Ye zaroori hai!)
+        st.markdown('</div>', unsafe_allow_html=True)
             final_cookies = cookies if cookies.strip() else user_config['cookies']
             db.update_user_config(
                 'MAIN',
