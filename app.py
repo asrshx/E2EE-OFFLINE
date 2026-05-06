@@ -23,278 +23,265 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ULTRA-MODERN PINK + PURPLE GLASSMORPHISM THEME
+# PINK + PURPLE GRADIENT THEME
 custom_css = """
 <style>
-    /* Clean Sans-Serif Font Import */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap');
 
     * {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: 'Playfair Display', serif;
     }
 
-    /* Animated Gradient Background (Same) */
     .stApp {
-        background: linear-gradient(-45deg, #0f0c29, #302b63, #240b36, #510a32);
+        background: linear-gradient(135deg, #1a0033 0%, #4a0033 25%, #8b0050 50%, #d4147a 75%, #ff69b4 100%);
         background-size: 400% 400%;
-        animation: gradient 15s ease infinite;
+        animation: gradientShift 12s ease infinite;
     }
 
-    @keyframes gradient {
+    @keyframes gradientShift {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
 
-    /* Floating Particles Effect Overlay */
-    .stApp::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle at 20% 80%, rgba(255, 20, 147, 0.08) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.08) 0%, transparent 50%),
-                    radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.03) 0%, transparent 50%);
-        pointer-events: none;
-        z-index: 0;
-    }
-
-    /* Main Container — Elevated Glass Card */
     .main .block-container {
-        background: rgba(255, 255, 255, 0.04);
-        backdrop-filter: blur(24px) saturate(1.4);
-        -webkit-backdrop-filter: blur(24px) saturate(1.4);
+        background: rgba(30, 10, 50, 0.55);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         border-radius: 28px;
-        padding: 40px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 
-            0 25px 50px -12px rgba(0, 0, 0, 0.6),
-            inset 0 1px 0 rgba(255, 255, 255, 0.05);
-        margin-top: 20px;
-        margin-bottom: 20px;
-        position: relative;
-        z-index: 1;
-    }
-
-    /* Aesthetic Header Card — Enhanced Glow */
-    .main-header {
-        background: linear-gradient(135deg, rgba(255, 20, 147, 0.15), rgba(138, 43, 226, 0.15), rgba(0, 255, 255, 0.05));
-        border-radius: 24px;
-        padding: 2.8rem;
-        text-align: center;
-        margin-bottom: 2rem;
-        border: 1px solid rgba(255, 105, 180, 0.2);
-        box-shadow: 0 0 60px rgba(255, 20, 147, 0.1);
+        padding: 32px;
+        border: 2px solid rgba(255, 105, 180, 0.45);
+        box-shadow: 0 12px 50px rgba(255, 20, 147, 0.25),
+                    inset 0 0 35px rgba(255, 105, 180, 0.12),
+                    0 0 80px rgba(138, 43, 226, 0.15);
         position: relative;
         overflow: hidden;
     }
 
-    /* Header subtle glow line */
-    .main-header::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 10%;
-        width: 80%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #ff69b4, #9b59b6, transparent);
-        border-radius: 100%;
-    }
-
-    .main-header h1 {
-        color: #ffffff;
-        font-size: 2.8rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        margin-bottom: 10px;
-        text-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
-    }
-
-    .main-header p {
-        color: #e0b0ff;
-        font-size: 1.1rem;
-        opacity: 0.9;
-    }
-
-    /* Modern Buttons — Smooth as Hell */
-    .stButton>button {
-        background: linear-gradient(135deg, #ff0080, #7928ca, #00d2ff);
-        background-size: 200% 200%;
-        color: white;
-        border: none;
-        border-radius: 14px;
-        padding: 0.6rem 2rem;
-        font-weight: 600;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 20px rgba(255, 0, 128, 0.3);
-        letter-spacing: 0.3px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .stButton>button::before {
+    .main .block-container::after {
         content: '';
         position: absolute;
         top: -50%;
         left: -50%;
         width: 200%;
         height: 200%;
-        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-        opacity: 0;
-        transition: opacity 0.4s;
+        background: radial-gradient(ellipse at 30% 20%, rgba(255, 105, 180, 0.08) 0%, transparent 50%),
+                    radial-gradient(ellipse at 70% 80%, rgba(138, 43, 226, 0.08) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .main-header {
+        background: linear-gradient(135deg, rgba(26, 0, 51, 0.85), rgba(138, 43, 226, 0.75), rgba(212, 20, 122, 0.7));
+        border: 2px solid #ff69b4;
+        border-radius: 25px;
+        padding: 2rem;
+        text-align: center;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 18px 55px rgba(0, 0, 0, 0.65),
+                    0 0 35px rgba(255, 105, 180, 0.30),
+                    inset 0 0 30px rgba(255, 20, 147, 0.15);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .main-header h1 {
+        background: linear-gradient(90deg, #ff69b4, #da70d6, #ff69b4, #ee82ee);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-family: 'Cinzel Decorative', cursive;
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
+        letter-spacing: 2px;
+    }
+
+    .main-header p {
+        color: #ffb6c1;
+        font-family: 'Great Vibes', cursive;
+        font-size: 1.6rem;
+        margin-top: 0.5rem;
+        letter-spacing: 1.5px;
+        text-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+    }
+
+    .header-logo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 18px;
+        border: 3px solid #ff69b4;
+        box-shadow: 0 0 30px rgba(255, 105, 180, 0.7),
+                    inset 0 0 15px rgba(255, 255, 255, 0.3);
+        object-fit: cover;
+    }
+
+    .stButton>button {
+        background: linear-gradient(45deg, #c71585, #ff69b4, #da70d6);
+        color: #ffffff;
+        border: 2px solid #ff1493;
+        border-radius: 16px;
+        padding: 1rem 2.4rem;
+        font-family: 'Cinzel Decorative', cursive;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.4s ease;
+        box-shadow: 0 8px 25px rgba(255, 20, 147, 0.45);
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        width: 100%;
+        letter-spacing: 1px;
     }
 
     .stButton>button:hover {
-        transform: translateY(-3px) scale(1.02);
-        background-position: 100% 100%;
-        box-shadow: 0 8px 35px rgba(255, 0, 128, 0.5);
+        transform: translateY(-5px) scale(1.04);
+        box-shadow: 0 15px 40px rgba(255, 20, 147, 0.75),
+                    0 0 30px rgba(218, 112, 214, 0.4);
+        background: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4);
     }
 
-    .stButton>button:hover::before {
-        opacity: 1;
-    }
-
-    .stButton>button:active {
-        transform: translateY(0px) scale(0.98);
-    }
-
-    /* Input Fields — Glass Inputs */
-    .stTextInput>div>div>input, 
-    .stTextArea>div>div>textarea {
-        background: rgba(0, 0, 0, 0.25);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+    .stTextInput>div>div>input,
+    .stTextArea>div>div>textarea,
+    .stNumberInput>div>div>input {
+        background: rgba(40, 10, 70, 0.75);
+        border: 2px solid #c71585;
         border-radius: 14px;
-        color: white !important;
-        padding: 14px 16px;
+        color: #ffb6c1;
+        padding: 1rem;
+        font-size: 1.1rem;
         transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
     }
 
-    .stTextInput>div>div>input:hover {
-        border-color: rgba(255, 105, 180, 0.3);
+    .stTextInput>div>div>input::placeholder,
+    .stTextArea>div>div>textarea::placeholder {
+        color: #ff69b480;
     }
 
-    .stTextInput>div>div>input:focus {
-        border-color: #ff69b4;
-        box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.15), 0 0 30px rgba(255, 105, 180, 0.05);
-    }
-
+    .stTextInput>div>div>input:focus,
     .stTextArea>div>div>textarea:focus {
         border-color: #ff69b4;
-        box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.15);
+        box-shadow: 0 0 0 4px rgba(255, 105, 180, 0.35), 0 0 20px rgba(255, 105, 180, 0.2);
+        background: rgba(60, 20, 100, 0.85);
     }
 
-    /* Labels */
     label {
-        color: #f0e6ff !important;
-        font-weight: 500 !important;
-        margin-bottom: 8px !important;
-        letter-spacing: 0.2px;
+        color: #ffb6c1 !important;
+        font-weight: 600 !important;
+        font-size: 1.15rem !important;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
     }
 
-    /* Tabs — Clean Glass Tabs */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 10px;
-        background-color: transparent;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        padding-bottom: 4px;
+        background: rgba(40, 10, 70, 0.65);
+        border-radius: 16px;
+        padding: 10px;
+        border: 1px solid #c71585;
+        backdrop-filter: blur(5px);
     }
 
     .stTabs [data-baseweb="tab"] {
-        height: 45px;
-        background-color: rgba(255, 255, 255, 0.03);
+        background: rgba(138, 43, 226, 0.45);
+        color: #ffb6c1;
         border-radius: 12px;
-        color: rgba(255, 255, 255, 0.6);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        padding: 0 22px;
+        padding: 14px 26px;
+        font-weight: 600;
         transition: all 0.3s ease;
-        font-weight: 500;
-    }
-
-    .stTabs [data-baseweb="tab"]:hover {
-        background-color: rgba(255, 255, 255, 0.08);
-        color: rgba(255, 255, 255, 0.9);
-        border-color: rgba(255, 255, 255, 0.15);
     }
 
     .stTabs [aria-selected="true"] {
-        background: rgba(255, 105, 180, 0.15) !important;
-        border: 1px solid rgba(255, 105, 180, 0.4) !important;
-        color: #ffb6c1 !important;
-        box-shadow: 0 0 20px rgba(255, 105, 180, 0.1);
+        background: linear-gradient(45deg, #c71585, #ff69b4);
+        color: #ffffff;
+        box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
     }
 
-    /* Metrics/Cards — Glassmorphism Cards */
-    [data-testid="stMetric"] {
-        background: rgba(255, 255, 255, 0.03);
-        padding: 24px;
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(12px);
-        transition: all 0.3s ease;
+    [data-testid="stMetricValue"] {
+        color: #ff69b4;
+        font-size: 2.4rem;
+        font-weight: 700;
+        text-shadow: 0 0 18px rgba(255, 105, 180, 0.7);
     }
 
-    [data-testid="stMetric"]:hover {
-        border-color: rgba(255, 105, 180, 0.2);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-        transform: translateY(-2px);
+    [data-testid="stMetricLabel"] {
+        color: #ffb6c1;
+        font-weight: 500;
     }
 
-    /* Selectbox / Dropdown */
-    .stSelectbox>div>div>div {
-        background: rgba(0, 0, 0, 0.25);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 14px;
-        color: white !important;
-    }
-
-    /* Expander */
-    .stExpander {
-        background: rgba(255, 255, 255, 0.02);
+    .console-section {
+        background: rgba(20, 0, 40, 0.75);
+        border: 2px solid #c71585;
         border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 22px;
+        margin-top: 28px;
+        box-shadow: inset 0 0 30px rgba(199, 21, 133, 0.1);
     }
 
-    /* Info/Success/Warning/Error boxes */
-    .stAlert {
+    .console-header {
+        color: #ff69b4;
+        font-family: 'Cinzel Decorative', cursive;
+        text-shadow: 0 0 18px #ff69b4bb;
+        margin-bottom: 18px;
+    }
+
+    .console-output {
+        background: linear-gradient(180deg, #0f001a 0%, #1a0033 100%);
+        border: 2px solid #8b0050;
         border-radius: 14px;
-        border-left-width: 4px;
-        backdrop-filter: blur(10px);
+        padding: 18px;
+        color: #ffb6c1;
+        font-family: 'Courier New', monospace;
+        font-size: 13.5px;
+        max-height: 480px;
+        overflow-y: auto;
+        box-shadow: inset 0 0 25px rgba(138, 43, 226, 0.15);
     }
 
-    /* DataFrames */
-    [data-testid="stDataFrame"] {
-        border-radius: 16px;
-        overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.06);
+    .console-line {
+        background: rgba(138, 43, 226, 0.2);
+        border-left: 4px solid #ff69b4;
+        padding: 9px 14px;
+        margin: 7px 0;
+        color: #ffb6c1;
+        border-radius: 0 8px 8px 0;
     }
 
-    /* Footer */
     .footer {
+        background: rgba(40, 10, 70, 0.75);
+        border-top: 3px solid #c71585;
+        color: #ffb6c1;
+        font-family: 'Great Vibes', cursive;
+        font-size: 1.4rem;
+        padding: 2.5rem;
+        text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
         text-align: center;
-        padding: 20px;
-        color: rgba(255, 255, 255, 0.3);
-        font-size: 0.85rem;
-        letter-spacing: 0.5px;
+        margin-top: 2rem;
+        border-radius: 20px 20px 0 0;
     }
 
-    /* Scrollbar — Aesthetic */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb {
-        background: linear-gradient(180deg, #ff69b4, #9b59b6);
+    hr {
+        border: none;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ff69b4, #c71585, #ff69b4, transparent);
+        margin: 25px 0;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(40, 10, 70, 0.3);
         border-radius: 10px;
     }
-    ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(180deg, #ff1493, #8e44ad);
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #c71585, #ff69b4);
+        border-radius: 10px;
     }
 
-    /* Selection highlight */
-    ::selection {
-        background: rgba(255, 105, 180, 0.3);
-        color: white;
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #ff69b4, #ff1493);
     }
 </style>
 """
