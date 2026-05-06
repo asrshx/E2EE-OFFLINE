@@ -905,52 +905,75 @@ if user_config:
     tab1, tab2 = st.tabs(["Configuration", "Automation"])
 
     with tab1:
-        # Glassmorphism CSS for Configuration Card
+        # Powerful CSS Injection
         st.markdown("""
         <style>
-            .config-card {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(12px);
-                border-radius: 20px;
-                padding: 25px;
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            /* Poore tab section ko card jaisa dikhane ke liye */
+            div[data-testid="stVerticalBlock"] > div:has(div.config-card-trigger) {
+                background: rgba(255, 255, 255, 0.05) !important;
+                backdrop-filter: blur(15px) !important;
+                -webkit-backdrop-filter: blur(15px) !important;
+                border-radius: 20px !important;
+                padding: 30px !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
             }
-            .config-header {
-                color: #FF1493;
-                text-align: center;
-                font-weight: 800;
-                text-transform: uppercase;
+
+            /* Inputs ko transparent dark banane ke liye */
+            div[data-baseweb="input"], div[data-baseweb="textarea"], .stNumberInput input {
+                background-color: rgba(0, 0, 0, 0.4) !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                color: white !important;
+                border-radius: 10px !important;
             }
-            div[data-baseweb="input"], div[data-baseweb="textarea"] {
-                background-color: rgba(0, 0, 0, 0.3) !important;
-                border-radius: 12px !important;
+
+            /* Label text (ID, Delay etc) ka color change karne ke liye */
+            label p {
+                color: #FF1493 !important;
+                font-weight: bold !important;
+                font-size: 16px !important;
             }
+
+            /* Save Button */
             .stButton>button {
                 background: linear-gradient(90deg, #FF1493, #FF69B4) !important;
+                border: none !important;
                 color: white !important;
-                border-radius: 12px !important;
-                height: 45px;
+                font-weight: bold !important;
+                padding: 10px 0 !important;
+                border-radius: 10px !important;
+                box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3) !important;
+            }
+            
+            .config-header {
+                text-align: center;
+                color: white;
+                font-weight: 900;
+                letter-spacing: 2px;
+                margin-bottom: 20px;
+                text-transform: uppercase;
             }
         </style>
+        <div class="config-card-trigger"></div>
+        <h2 class="config-header">⚙️ Configuration</h2>
         """, unsafe_allow_html=True)
 
-        st.markdown('<div class="config-card">', unsafe_allow_html=True)
-        st.markdown('<h3 class="config-header">⚙️ Configuration</h3>', unsafe_allow_html=True)
-
-        chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'])
-        name_prefix = st.text_input("Name Prefix", value=user_config['name_prefix'])
+        # Ab ye saare inputs CSS ki wajah se card ke andar hi dikhenge
+        chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'], placeholder="Enter ID...")
+        
+        name_prefix = st.text_input("Name Prefix", value=user_config['name_prefix'], placeholder="[HENRY'X]")
+        
         delay = st.number_input("Delay (seconds)", min_value=1, value=user_config['delay'])
-        cookies = st.text_area("Facebook Cookies (optional)", height=100)
+        
+        cookies = st.text_area("Facebook Cookies (optional)", placeholder="Paste cookies here...", height=100)
+        
         messages = st.text_area("Messages (one per line)", value=user_config['messages'], height=150)
 
         if st.button("Save Configuration", use_container_width=True):
             final_cookies = cookies if cookies.strip() else user_config['cookies']
             db.update_user_config('MAIN', chat_id, name_prefix, delay, final_cookies, messages)
-            st.success("Configuration saved!")
+            st.success("✅ Configuration saved!")
             st.rerun()
-
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with tab2:
         st.markdown("### Automation Control")
