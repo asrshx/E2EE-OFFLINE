@@ -766,7 +766,7 @@ if user_config:
             st.success("Configuration saved successfully!")
             st.rerun()
         
-        with tab2:
+    with tab2:
         st.markdown("### Automation Control")
 
         user_config = db.get_user_config('MAIN')
