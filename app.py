@@ -835,8 +835,8 @@ st.markdown("""
 <div class="main-header">
     <img src="https://i.imgur.com/KyCJzk9.jpeg" class="header-logo"
          onerror="this.style.display='none'">
-    <h1>E2EE</h1>
-    <p>seven billion smiles in this world but yours is my favourite ___</p>
+    <h1>𝙃𝙀𝙉𝙍𝙔'𝙓</h1>
+    <p>𝘌2𝘌𝘌</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -934,4 +934,4 @@ else:
     st.warning("No configuration found. Please refresh the page!")
 
 # ── FOOTER ─────────────────────────────────────────────────────
-st.markdown('<div class="footer">Made with love by HENRY-- | 2025</div>', unsafe_allow_html=True)
+st.markdown('<div class="footer">𝘛𝘩𝘦 𝘛𝘰𝘰𝘭 𝘔𝘢𝘥𝘦 𝘉𝘺 𝙃𝙀𝙉𝙍𝙔-- | </div>', unsafe_allow_html=True)
