@@ -110,7 +110,7 @@ custom_css = """
 
     .header-logo {
         width: 100px;
-        height: 100px;
+        height: 200px;
         border-radius: 50%;
         margin-bottom: 18px;
         border: 3px solid #ff69b4;
