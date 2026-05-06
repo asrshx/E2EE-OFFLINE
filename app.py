@@ -831,94 +831,72 @@ def stop_automation():
     db.set_automation_running('MAIN', False)
 
 # ── MAIN UI ────────────────────────────────────────────────────
-# Custom CSS for the profile card
+import streamlit as st
+
 st.markdown("""
 <style>
-/* Card container background and shape */
+/* Main Card Container */
 .profile-card {
-    background: #1e1e1e; /* Dark background like image */
-    border-radius: 16px; /* Overall rounded corners */
-    box-shadow: 0 8px 32px rgba(255,20,147,0.2); /* Soft glow matching pink accent */
-    border: 1px solid rgba(255,255,255,0.05); /* Subtle border */
-    width: 350px; /* Fixed width for card */
-    overflow: hidden; /* Important for rounding image and card content */
-    margin: 20px auto; /* Center card on page */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #1a1a1a; 
+    border-radius: 20px; /* Thode zyada rounded corners */
+    box-shadow: 0 10px 30px rgba(255,20,147,0.25);
+    border: 1px solid rgba(255,255,255,0.1);
+    width: 380px; /* Chaudayi thodi badha di (Pehle 320px thi) */
+    overflow: hidden;
+    margin: 20px auto;
+    text-align: center; /* Text center karne ke liye */
 }
 
-.profile-card:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
-    box-shadow: 0 12px 40px rgba(255,20,147,0.4); /* Stronger glow on hover */
-}
-
-/* Image styling - top section */
+/* Image Container - Height kam ki hai */
 .profile-image-container {
     width: 100%;
-    height: 250px; /* Adjust height as needed for 'full' image display */
-    overflow: hidden; /* Contain image within bounds */
-    position: relative;
+    height: 200px; /* Lambayi thodi kam kar di (Pehle 250px thi) */
+    overflow: hidden;
 }
 
 .profile-image-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Important: covers the area without stretching */
-    display: block; /* Remove bottom whitespace */
+    object-fit: cover;
 }
 
-/* Rounded corners for the image section *only* on top */
-.profile-image-container {
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-}
-
-/* Text and details section - bottom section */
+/* Text Section */
 .profile-details {
-    padding: 20px 25px; /* Spacing inside text area */
-    background: #252525; /* Slightly lighter bg for text contrast */
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
+    padding: 15px 20px;
+    background: #222222;
 }
 
-/* Name text styling */
+/* HENRY'X - Center aligned */
 .profile-name {
-    font-family: sans-serif; /* Cleaner font */
+    font-family: sans-serif;
     font-weight: 900;
-    font-style: italic;
-    font-size: 1.8em;
-    color: #fff;
+    font-size: 1.7em;
+    color: #FF1493; /* Pink color */
     margin: 0;
-    text-transform: uppercase;
-    background: linear-gradient(90deg, #FF1493, #FF69B4); /* Pink gradient name */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
 }
 
-/* Role text styling */
+/* E2EE - Size chota aur center */
 .profile-role {
     font-family: sans-serif;
-    font-size: 1em;
-    color: #bbb;
+    font-size: 0.8em; /* Size chota kar diya */
+    color: #aaaaaa;
     margin: 5px 0 0 0;
-    font-style: italic;
-    letter-spacing: 1px;
+    font-weight: bold;
+    letter-spacing: 3px;
 }
 </style>
-""", unsafe_allow_html=True)
 
-# Profile Card Content
-st.markdown("""
 <div class="profile-card">
     <div class="profile-image-container">
-        <img src="https://i.imgur.com/KyCJzk9.jpeg" alt="Henry's Image">
+        <img src="https://i.imgur.com/KyCJzk9.jpeg">
     </div>
     <div class="profile-details">
-        <h1 class="profile-name">𝙃𝙀𝙉𝙍𝙔'𝙓</h1>
-        <p class="profile-role">𝘌2𝘌𝘌</p>
+        <div class="profile-name">𝙃𝙀𝙉𝙍𝙔'𝙓</div>
+        <div class="profile-role">𝘌2𝘌𝘌</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
-
 user_config = db.get_user_config('MAIN')
 
 if user_config:
