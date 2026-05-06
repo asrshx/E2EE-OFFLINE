@@ -25,63 +25,98 @@ st.set_page_config(
 
 import streamlit as st
 
-# Is line ke pehle koi space nahi hona chahiye
+# Bilkul zero indentation se shuru karein
 custom_css = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-* { font-family: 'Inter', sans-serif; }
 
+/* Pura Page Background */
 .stApp {
-    background: linear-gradient(160deg, #1a0033 0%, #4a0033 50%, #2d004d 100%);
+    background: radial-gradient(circle at top right, #4a0033, #1a0033);
+    background-attachment: fixed;
 }
 
-/* Main Container Card */
+/* Main Container: Floating Glass Card */
 .main .block-container {
-    background: rgba(255, 255, 255, 0.05) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 24px !important;
-    padding: 20px !important;
-    margin: 20px auto !important;
-    border: 1px solid rgba(255, 105, 180, 0.25) !important;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
-    max-width: 420px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border-radius: 35px !important;
+    padding: 30px !important;
+    margin: 40px auto !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6) !important;
+    max-width: 440px !important; /* Perfect Mobile/Web Card Width */
 }
 
-/* Rounded Header Image 150x80 */
+/* Header Image: 150x80 Rounded Corners */
 .custom-header {
     width: 150px !important;
     height: 80px !important;
     object-fit: cover;
-    border-radius: 15px;
+    border-radius: 20px;
     display: block;
-    margin: 0 auto 15px auto;
-    border: 2px solid #ff69b4;
+    margin: 0 auto 20px auto;
+    border: 2px solid rgba(255, 105, 180, 0.5);
+    box-shadow: 0 10px 25px rgba(255, 20, 147, 0.3);
 }
+
+/* Typography Clean-up */
+* { font-family: 'Inter', sans-serif !important; }
 
 h1, h2, h3, p, label {
-    color: white !important;
+    color: #ffffff !important;
     text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-.stTextInput>div>div>input {
-    background: rgba(0, 0, 0, 0.3) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 10px !important;
-    color: white !important;
+/* Input Fields: Premium Dark Glass */
+.stTextInput>div>div>input, .stTextArea>div>div>textarea {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 105, 180, 0.3) !important;
+    border-radius: 15px !important;
+    color: #ffb6c1 !important;
+    padding: 12px !important;
 }
 
+/* Tabs: Minimalist & Aesthetic */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 15px;
+    background: transparent;
+}
+.stTabs [data-baseweb="tab"] {
+    color: rgba(255, 255, 255, 0.6) !important;
+    border-radius: 10px;
+}
+.stTabs [aria-selected="true"] {
+    background: rgba(255, 105, 180, 0.2) !important;
+    color: #ff69b4 !important;
+    border-bottom: 2px solid #ff69b4 !important;
+}
+
+/* Ultra-Cool Button */
 .stButton>button {
-    background: linear-gradient(90deg, #ff0080, #7928ca) !important;
+    background: linear-gradient(135deg, #ff0080 0%, #7928ca 100%) !important;
     color: white !important;
     border: none !important;
-    border-radius: 12px !important;
+    border-radius: 16px !important;
     width: 100% !important;
     font-weight: 700 !important;
-    padding: 10px !important;
+    font-size: 1rem !important;
+    padding: 14px !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 20px rgba(255, 0, 128, 0.4);
+    transition: 0.4s all ease;
 }
 
-footer, header {visibility: hidden;}
+.stButton>button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 0, 128, 0.6);
+}
+
+/* UI Hiding */
+header, footer { visibility: hidden; height: 0; }
 </style>
 """
 
