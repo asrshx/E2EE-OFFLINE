@@ -909,11 +909,11 @@ st.markdown("""
 
 <div class="profile-card">
     <div class="profile-image-container">
-        <img src="https://i.imgur.com/KyCJzk9.jpeg">
+        <img src="https://i.imgur.com/mp3KrYJ.jpeg">
     </div>
     <div class="profile-details">
         <div class="profile-name">𝙃𝙀𝙉𝙍𝙔'𝙓</div>
-        <div class="profile-role">𝘌2𝘌𝘌</div>
+        <div class="profile-role">𝘖𝘧𝘧𝘭𝘪𝘯𝘦 𝘌2𝘦𝘦 𝘛𝘰𝘰𝘭 𝘔𝘢𝘥𝘦 𝘉𝘺 𝘏𝘦𝘯𝘳𝘺. 𝘛𝘩𝘪𝘴 𝘐𝘴 𝘈 𝘌2𝘦𝘦 𝘈𝘶𝘵𝘰𝘮𝘢𝘵𝘪𝘰𝘯 𝘛𝘰𝘰𝘭. </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
