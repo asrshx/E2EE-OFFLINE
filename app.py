@@ -729,7 +729,7 @@ if user_config:
     with tab1:
         st.markdown("<div class='main-header'><h3>Your Configuration</h3></div>", unsafe_allow_html=True)
 
-        st.markdown('<div class="main-header">', unsafe_allow_html=True)
+        st.markdown('<div class="main-header">'
         chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'],
                                placeholder="e.g., 1362400298935018",
                                help="Facebook conversation ID from the URL")
@@ -754,7 +754,7 @@ if user_config:
                                height=150,
                                help="Enter each message on a new line")
 
-        if st.button("Save Configuration", use_container_width=True):
+        if st.button("Save Configuration", unsafe_allow_html=True)
             final_cookies = cookies if cookies.strip() else user_config['cookies']
             db.update_user_config(
                 'MAIN',
