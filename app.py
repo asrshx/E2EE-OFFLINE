@@ -955,7 +955,6 @@ if user_config:
             }
         </style>
         <div class="config-card-trigger"></div>
-        <h2 class="config-header">⚙️ Configuration</h2>
         """, unsafe_allow_html=True)
 
         # Ab ye saare inputs CSS ki wajah se card ke andar hi dikhenge
@@ -1024,4 +1023,4 @@ else:
     st.warning("No configuration found. Please refresh the page!")
 
 # ── FOOTER ─────────────────────────────────────────────────────
-st.markdown('<div class="footer">Made with love by HENRY-- | 2025</div>', unsafe_allow_html=True)
+st.markdown('<div class="footer">𝘛𝘩𝘦 𝘌2𝘦𝘦 𝘛𝘰𝘰𝘭 𝘔𝘢𝘥𝘦 𝘉𝘺 𝙃𝙀𝙉𝙍𝙔-- | </div>', unsafe_allow_html=True)
