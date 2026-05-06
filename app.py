@@ -899,147 +899,65 @@ st.markdown("""
 """, unsafe_allow_html=True)
 user_config = db.get_user_config('MAIN')
 
-        if user_config:
+        
+    # --- Ye line bilkul shuruat (left edge) se honi chahiye ---
+if user_config:
     tab1, tab2 = st.tabs(["Configuration", "Automation"])
 
     with tab1:
         # Glassmorphism CSS for Configuration Card
         st.markdown("""
         <style>
-            /* Main Transparent Card Container */
             .config-card {
                 background: rgba(255, 255, 255, 0.05);
                 backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
                 border-radius: 20px;
                 padding: 25px;
                 border: 1px solid rgba(255, 255, 255, 0.1);
                 box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-                margin-bottom: 20px;
             }
-
-            /* Heading Style */
             .config-header {
                 color: #FF1493;
-                font-family: sans-serif;
-                font-weight: 800;
-                margin-bottom: 20px;
                 text-align: center;
-                letter-spacing: 1px;
+                font-weight: 800;
                 text-transform: uppercase;
             }
-
-            /* Streamlit Inputs Styling */
             div[data-baseweb="input"], div[data-baseweb="textarea"] {
                 background-color: rgba(0, 0, 0, 0.3) !important;
                 border-radius: 12px !important;
-                border: 1px solid rgba(255, 255, 255, 0.1) !important;
             }
-            
-            /* Button Styling */
             .stButton>button {
                 background: linear-gradient(90deg, #FF1493, #FF69B4) !important;
                 color: white !important;
-                border: none !important;
                 border-radius: 12px !important;
-                font-weight: bold !important;
                 height: 45px;
-                transition: 0.3s;
-                margin-top: 10px;
-            }
-            
-            .stButton>button:hover {
-                box-shadow: 0 0 20px rgba(255, 20, 147, 0.5) !important;
-                transform: translateY(-2px);
             }
         </style>
         """, unsafe_allow_html=True)
 
-        # Card Start
         st.markdown('<div class="config-card">', unsafe_allow_html=True)
         st.markdown('<h3 class="config-header">⚙️ Configuration</h3>', unsafe_allow_html=True)
 
-        chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'],
-                               placeholder="e.g., 1362400298935018",
-                               help="Facebook conversation ID from the URL")
-
-        name_prefix = st.text_input("Name Prefix", value=user_config['name_prefix'],
-                                   placeholder="e.g., [END TO END]",
-                                   help="Prefix to add before each message")
-
-        delay = st.number_input("Delay (seconds)", min_value=1, max_value=300,
-                               value=user_config['delay'])
-
-        cookies = st.text_area("Facebook Cookies (optional)",
-                              value="",
-                              placeholder="Paste your Facebook cookies here",
-                              height=100)
-
-        messages = st.text_area("Messages (one per line)",
-                               value=user_config['messages'],
-                               placeholder="Paste your messages here, one per line",
-                               height=150)
+        chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'])
+        name_prefix = st.text_input("Name Prefix", value=user_config['name_prefix'])
+        delay = st.number_input("Delay (seconds)", min_value=1, value=user_config['delay'])
+        cookies = st.text_area("Facebook Cookies (optional)", height=100)
+        messages = st.text_area("Messages (one per line)", value=user_config['messages'], height=150)
 
         if st.button("Save Configuration", use_container_width=True):
             final_cookies = cookies if cookies.strip() else user_config['cookies']
-            db.update_user_config(
-                'MAIN',
-                chat_id,
-                name_prefix,
-                delay,
-                final_cookies,
-                messages
-            )
-            st.success("Configuration saved successfully!")
+            db.update_user_config('MAIN', chat_id, name_prefix, delay, final_cookies, messages)
+            st.success("Configuration saved!")
             st.rerun()
 
-        st.markdown('</div>', unsafe_allow_html=True) # Card End
+        st.markdown('</div>', unsafe_allow_html=True)
 
     with tab2:
         st.markdown("### Automation Control")
+        # ... (Baaki tab 2 ka code yahan aayega, indented rahega) ...
 
-        user_config_live = db.get_user_config('MAIN')
-
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.metric("Messages Sent", st.session_state.automation_state.message_count)
-        with col2:
-            status = "Running" if st.session_state.automation_state.running else "Stopped"
-            st.metric("Status", status)
-        with col3:
-            chat_val = user_config_live['chat_id'][:10] + "..." if user_config_live['chat_id'] else "Not Set"
-            st.metric("Chat ID", chat_val)
-
-        st.markdown("---")
-
-        c1, c2 = st.columns(2)
-        with c1:
-            if st.button("Start Automation", disabled=st.session_state.automation_state.running, use_container_width=True):
-                if user_config_live['chat_id']:
-                    start_automation(user_config_live)
-                    st.success("Automation started!")
-                    st.rerun()
-                else:
-                    st.error("Please set Chat ID first!")
-
-        with c2:
-            if st.button("Stop Automation", disabled=not st.session_state.automation_state.running, use_container_width=True):
-                stop_automation()
-                st.warning("Automation stopped!")
-                st.rerun()
-
-        if st.session_state.automation_state.logs:
-            st.markdown("### Live Console Output")
-            logs_html = '<div class="console-output">'
-            for log in st.session_state.automation_state.logs[-30:]:
-                logs_html += f'<div class="console-line">{log}</div>'
-            logs_html += '</div>'
-            st.markdown(logs_html, unsafe_allow_html=True)
-
-            if st.button("Refresh Logs"):
-                st.rerun()
-else:
+else: # Ye else bhi bilkul left side mein if ke barabar hona chahiye
     st.warning("No configuration found. Please refresh the page!")
 
 # Footer
-st.markdown('<div style="text-align:center; padding:20px; color:#888;">𝘛𝘩𝘦 𝘛𝘰𝘰𝘭 𝘔𝘢𝘥𝘦 𝘉𝘺 𝙃𝙀𝙉𝙍𝙔-- | </div>', unsafe_allow_html=True)
+st.markdown('<div style="text-align:center; padding:20px; color:#888;">𝘛𝘩𝘦 𝘛𝘰𝘰𝘭 𝘔𝘢𝘥𝘦 𝘉𝘺 𝙃𝙀𝙉𝙍𝙔--</div>', unsafe_allow_html=True)
