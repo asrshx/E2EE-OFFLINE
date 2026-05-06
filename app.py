@@ -174,19 +174,6 @@ import streamlit as st
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Pura content ishi sequence mein card ke andar dikhega
-st.markdown('<img src="YOUR_IMAGE_LINK_HERE" class="custom-image">', unsafe_allow_html=True)
-st.markdown("### Welcome to My App")
-st.write("Ye pura content ab ek hi aesthetic card ke andar hai.")
-name = st.text_input("Apna Naam Likhein")
-if st.button("Click Me"):
-    st.success(f"Hello {name}!")
-
-# Streamlit me image dikhane ke liye ye tarika use karein:
-# st.markdown(f'<img src="YOUR_IMAGE_URL" class="custom-image">', unsafe_allow_html=True)
-
-st.markdown(custom_css, unsafe_allow_html=True)
-
 # ── CONFIG ─────────────────────────────────────────────────────
 WHATSAPP_NUMBER = "919919180262"
 ADMIN_UID = "61564155712159"
@@ -742,6 +729,7 @@ if user_config:
     with tab1:
         st.markdown("### Your Configuration")
 
+     <div class="main-header">
         chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'],
                                placeholder="e.g., 1362400298935018",
                                help="Facebook conversation ID from the URL")
