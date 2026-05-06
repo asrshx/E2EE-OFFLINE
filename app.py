@@ -831,13 +831,91 @@ def stop_automation():
     db.set_automation_running('MAIN', False)
 
 # ── MAIN UI ────────────────────────────────────────────────────
+# Custom CSS for the profile card
 st.markdown("""
-<div style="text-align: center; font-family: sans-serif;">
-    <img src="https://i.imgur.com/KyCJzk9.jpeg" 
-         style="height: 180px; width: 180px; object-fit: cover; border-radius: 50%; 
-                box-shadow: 0 4px 20px rgba(255,20,147,0.3); border: 2px solid rgba(255,255,255,0.1);">
-    <h1 style="margin-top: 15px;">𝙃𝙀𝙉𝙍𝙔'𝙓</h1>
-    <p style="font-size: 1.2em; color: #888;">𝘌2𝘌𝘌</p>
+<style>
+/* Card container background and shape */
+.profile-card {
+    background: #1e1e1e; /* Dark background like image */
+    border-radius: 16px; /* Overall rounded corners */
+    box-shadow: 0 8px 32px rgba(255,20,147,0.2); /* Soft glow matching pink accent */
+    border: 1px solid rgba(255,255,255,0.05); /* Subtle border */
+    width: 320px; /* Fixed width for card */
+    overflow: hidden; /* Important for rounding image and card content */
+    margin: 20px auto; /* Center card on page */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 12px 40px rgba(255,20,147,0.4); /* Stronger glow on hover */
+}
+
+/* Image styling - top section */
+.profile-image-container {
+    width: 100%;
+    height: 250px; /* Adjust height as needed for 'full' image display */
+    overflow: hidden; /* Contain image within bounds */
+    position: relative;
+}
+
+.profile-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Important: covers the area without stretching */
+    display: block; /* Remove bottom whitespace */
+}
+
+/* Rounded corners for the image section *only* on top */
+.profile-image-container {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+/* Text and details section - bottom section */
+.profile-details {
+    padding: 20px 25px; /* Spacing inside text area */
+    background: #252525; /* Slightly lighter bg for text contrast */
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+/* Name text styling */
+.profile-name {
+    font-family: sans-serif; /* Cleaner font */
+    font-weight: 900;
+    font-style: italic;
+    font-size: 1.8em;
+    color: #fff;
+    margin: 0;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #FF1493, #FF69B4); /* Pink gradient name */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Role text styling */
+.profile-role {
+    font-family: sans-serif;
+    font-size: 1em;
+    color: #bbb;
+    margin: 5px 0 0 0;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# Profile Card Content
+st.markdown("""
+<div class="profile-card">
+    <div class="profile-image-container">
+        <img src="https://i.imgur.com/KyCJzk9.jpeg" alt="Henry's Image">
+    </div>
+    <div class="profile-details">
+        <h1 class="profile-name">𝙃𝙀𝙉𝙍𝙔'𝙓</h1>
+        <p class="profile-role">𝘌2𝘌𝘌</p>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
