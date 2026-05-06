@@ -840,7 +840,7 @@ st.markdown("""
     border-radius: 16px; /* Overall rounded corners */
     box-shadow: 0 8px 32px rgba(255,20,147,0.2); /* Soft glow matching pink accent */
     border: 1px solid rgba(255,255,255,0.05); /* Subtle border */
-    width: 320px; /* Fixed width for card */
+    width: 350px; /* Fixed width for card */
     overflow: hidden; /* Important for rounding image and card content */
     margin: 20px auto; /* Center card on page */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
