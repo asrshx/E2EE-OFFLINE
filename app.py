@@ -34,10 +34,30 @@ custom_css = """
     }
 
     .stApp {
-        background: linear-gradient(135deg, #1a0033 0%, #4a0033 25%, #8b0050 50%, #d4147a 75%, #ff69b4 100%);
-        background-size: 400% 400%;
-        animation: gradientShift 12s ease infinite;
-    }
+            min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(145deg, #0d0b1a 0%, #1a0a2e 40%, #2d0f4e 70%, #0f0c1a 100%);
+    position: relative;
+    overflow-x: hidden;
+  }
+  /* Animated bg particles */
+  body::before {
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(2px 2px at 20% 30%, #ff66cc40, transparent),
+                radial-gradient(2px 2px at 80% 70%, #ff33aa30, transparent),
+                radial-gradient(2px 2px at 40% 50%, #a855f740, transparent),
+                radial-gradient(2px 2px at 60% 20%, #ff66cc20, transparent);
+    background-size: 200% 200%;
+    animation: stars 20s ease infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
 
     @keyframes gradientShift {
         0% { background-position: 0% 50%; }
