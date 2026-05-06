@@ -832,12 +832,12 @@ def stop_automation():
 
 # ── MAIN UI ────────────────────────────────────────────────────
 st.markdown("""
-<div class="main-header">
-    st.markdown(f"""
+<div style="text-align: center; font-family: sans-serif;">
     <img src="https://i.imgur.com/KyCJzk9.jpeg" 
-         style="height: 180px; width: 90px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 20px rgba(255,20,147,0.3); border: 1px solid rgba(255,255,255,0.1);">
-    <h1>𝙃𝙀𝙉𝙍𝙔'𝙓</h1>
-    <p>𝘌2𝘌𝘌</p>
+         style="height: 180px; width: 180px; object-fit: cover; border-radius: 50%; 
+                box-shadow: 0 4px 20px rgba(255,20,147,0.3); border: 2px solid rgba(255,255,255,0.1);">
+    <h1 style="margin-top: 15px;">𝙃𝙀𝙉𝙍𝙔'𝙓</h1>
+    <p style="font-size: 1.2em; color: #888;">𝘌2𝘌𝘌</p>
 </div>
 """, unsafe_allow_html=True)
 
