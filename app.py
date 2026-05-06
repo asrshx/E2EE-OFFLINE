@@ -727,13 +727,8 @@ if user_config:
     tab1, tab2 = st.tabs(["Configuration", "Automation"])
 
     with tab1:
-        # 1. Card shuru ho raha hai (Sirf opening tag)
-        st.markdown('<div class="main-header">', unsafe_allow_html=True)
-        
-        # 2. Header text
         st.markdown("### Your Configuration")
-        
-        # 3. Saare Inputs (Ab ye Python code hai, isliye triple quotes se bahar hain)
+
         chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'],
                                placeholder="e.g., 1362400298935018",
                                help="Facebook conversation ID from the URL")
@@ -758,8 +753,7 @@ if user_config:
                                height=150,
                                help="Enter each message on a new line")
 
-        # 4. Save Button aur Logic
-        if st.button("Save Configuration"):
+        if st.button("Save Configuration", use_container_width=True):
             final_cookies = cookies if cookies.strip() else user_config['cookies']
             db.update_user_config(
                 'MAIN',
@@ -771,10 +765,7 @@ if user_config:
             )
             st.success("Configuration saved successfully!")
             st.rerun()
-
-        # 5. Card ko band karne wala tag (Ye zaroori hai!)
-        st.markdown('</div>', unsafe_allow_html=True)
-    with tab2:
+            
         st.markdown("### Automation Control")
 
         user_config = db.get_user_config('MAIN')
