@@ -903,44 +903,102 @@ if user_config:
     tab1, tab2 = st.tabs(["Configuration", "Automation"])
 
     with tab1:
-        st.markdown("### Your Configuration")
 
-        chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'],
-                               placeholder="e.g., 1362400298935018",
-                               help="Facebook conversation ID from the URL")
+# Glassmorphism CSS for Configuration Card
+st.markdown("""
+<style>
+    /* Main Transparent Card Container */
+    .config-card {
+        background: rgba(255, 255, 255, 0.05); /* Transparent white */
+        backdrop-filter: blur(10px); /* Blur effect */
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        margin-bottom: 20px;
+    }
 
-        name_prefix = st.text_input("Name Prefix", value=user_config['name_prefix'],
-                                   placeholder="e.g., [END TO END]",
-                                   help="Prefix to add before each message")
+    /* Heading Style */
+    .config-header {
+        color: #FF1493; /* Pink color matching your profile */
+        font-family: sans-serif;
+        font-weight: 800;
+        margin-bottom: 20px;
+        text-align: center;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
 
-        delay = st.number_input("Delay (seconds)", min_value=1, max_value=300,
-                               value=user_config['delay'],
-                               help="Wait time between messages")
+    /* Targetting Streamlit inputs to make them look cohesive */
+    div[data-baseweb="input"], div[data-baseweb="textarea"] {
+        background-color: rgba(0, 0, 0, 0.2) !important;
+        border-radius: 10px !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* Button Styling */
+    .stButton>button {
+        background: linear-gradient(90deg, #FF1493, #FF69B4) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 10px !important;
+        font-weight: bold !important;
+        height: 45px;
+        transition: 0.3s;
+    }
+    
+    .stButton>button:hover {
+        box-shadow: 0 0 15px rgba(255, 20, 147, 0.6) !important;
+        transform: scale(1.02);
+    }
+</style>
+""", unsafe_allow_html=True)
 
-        cookies = st.text_area("Facebook Cookies (optional)",
-                              value="",
-                              placeholder="Paste your Facebook cookies here",
-                              height=100,
-                              help="Your cookies are stored encrypted")
+# Wrap everything inside a div for styling
+st.markdown('<div class="config-card">', unsafe_allow_html=True)
+st.markdown('<h3 class="config-header">⚙️ Your Configuration</h3>', unsafe_allow_html=True)
 
-        messages = st.text_area("Messages (one per line)",
-                               value=user_config['messages'],
-                               placeholder="Paste your messages here, one per line",
-                               height=150,
-                               help="Enter each message on a new line")
+# Form Inputs
+chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'],
+                       placeholder="e.g., 1362400298935018",
+                       help="Facebook conversation ID from the URL")
 
-        if st.button("Save Configuration", use_container_width=True):
-            final_cookies = cookies if cookies.strip() else user_config['cookies']
-            db.update_user_config(
-                'MAIN',
-                chat_id,
-                name_prefix,
-                delay,
-                final_cookies,
-                messages
-            )
-            st.success("Configuration saved successfully!")
-            st.rerun()
+name_prefix = st.text_input("Name Prefix", value=user_config['name_prefix'],
+                           placeholder="e.g., [END TO END]",
+                           help="Prefix to add before each message")
+
+# Layout for smaller inputs
+col1, col2 = st.columns([1, 1])
+with col1:
+    delay = st.number_input("Delay (seconds)", min_value=1, max_value=300,
+                           value=user_config['delay'])
+
+cookies = st.text_area("Facebook Cookies (optional)",
+                      value="",
+                      placeholder="Paste your Facebook cookies here",
+                      height=100)
+
+messages = st.text_area("Messages (one per line)",
+                       value=user_config['messages'],
+                       placeholder="Paste your messages here, one per line",
+                       height=150)
+
+if st.button("Save Configuration", use_container_width=True):
+    final_cookies = cookies if cookies.strip() else user_config['cookies']
+    db.update_user_config(
+        'MAIN',
+        chat_id,
+        name_prefix,
+        delay,
+        final_cookies,
+        messages
+    )
+    st.success("Configuration saved successfully!")
+    st.rerun()
+
+st.markdown('</div>', unsafe_allow_html=True) # Closing the card div
+
         
     with tab2:
         st.markdown("### Automation Control")
