@@ -727,8 +727,7 @@ if user_config:
     tab1, tab2 = st.tabs(["Configuration", "Automation"])
 
     with tab1:
-        st.markdown("<div class="main-header"> ### Your Configuration")
-
+        st.markdown("<div class='main-header'><h3>Your Configuration</h3></div>", unsafe_allow_html=True)
      
         chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'],
                                placeholder="e.g., 1362400298935018",
