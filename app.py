@@ -727,9 +727,9 @@ if user_config:
     tab1, tab2 = st.tabs(["Configuration", "Automation"])
 
     with tab1:
-        st.markdown("### Your Configuration")
+        st.markdown("<div class="main-header"> ### Your Configuration")
 
-     <div class="main-header">
+     
         chat_id = st.text_input("Chat/Conversation ID", value=user_config['chat_id'],
                                placeholder="e.g., 1362400298935018",
                                help="Facebook conversation ID from the URL")
