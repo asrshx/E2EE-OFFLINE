@@ -869,7 +869,7 @@ st.markdown("""
 
 /* Image Container - Height kam ki hai */
 .profile-image-container {
-    width: 100%;
+    width: 150px;
     height: 200px; /* Lambayi thodi kam kar di (Pehle 250px thi) */
     overflow: hidden;
 }
