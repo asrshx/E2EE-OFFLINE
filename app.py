@@ -861,7 +861,7 @@ st.markdown("""
     border-radius: 20px; /* Thode zyada rounded corners */
     box-shadow: 0 10px 30px rgba(255,20,147,0.25);
     border: 1px solid rgba(255,255,255,0.1);
-    width: 380px; /* Chaudayi thodi badha di (Pehle 320px thi) */
+    width: 300px; /* Chaudayi thodi badha di (Pehle 320px thi) */
     overflow: hidden;
     margin: 20px auto;
     text-align: center; /* Text center karne ke liye */
@@ -869,7 +869,7 @@ st.markdown("""
 
 /* Image Container - Height kam ki hai */
 .profile-image-container {
-    width: 150px;
+    width: 100%;
     height: 200px; /* Lambayi thodi kam kar di (Pehle 250px thi) */
     overflow: hidden;
 }
